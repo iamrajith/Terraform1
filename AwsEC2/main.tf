@@ -44,6 +44,7 @@ resource "aws_vpc" "myvpc" {
 resource "aws_subnet" "mysubnet" {
   vpc_id = aws_vpc.myvpc.id
   cidr_block = var.mycidrsub
+  availability_zone = "us-west-2a"
   tags = {
     Name = "Pavan-VPC-Subnet1"
    }
@@ -132,6 +133,7 @@ resource "aws_instance" "myvm1" {
   subnet_id = aws_subnet.mysubnet.id
   associate_public_ip_address = true
   vpc_security_group_ids = [aws_security_group.mysg.id]
+  availability_zone = "us-west-2a"
 
   tags = {
     Name = "Server1"
@@ -145,6 +147,7 @@ resource "aws_instance" "myvm2" {
   key_name = "testkey2"
   subnet_id = aws_subnet.mysubnet.id
   associate_public_ip_address = true
+  availability_zone = "us-west-2a"
   vpc_security_group_ids = [aws_security_group.mysg.id]
   user_data = <<-EOF
   #!/bin/bash
